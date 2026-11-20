@@ -217,9 +217,9 @@ footer .wrap { display: grid; gap: 8px; }
           <p>The forecast for the city your next game is in, at game time, with the hours around it. Indoor arenas are marked, and the ballpark's wind shows during baseball.</p>
         </div>
         <div class="pane">
-          <div class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
-          <h3>Set up from your phone</h3>
-          <p>Scan the code on the cabinet, pick your teams from any league, and save. No typing on the cabinet, no account, nothing to sign up for.</p>
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="14" height="10" rx="1.5"/><path d="M6 18h6M9 14v4"/><rect x="17" y="8" width="5" height="11" rx="1.2"/></svg></div>
+          <h3>Set up from your phone or computer</h3>
+          <p>Scan the code on the cabinet with your phone, or type the address it shows into a browser on your computer. Pick your teams from any league and save. No typing on the cabinet, no account, nothing to sign up for.</p>
         </div>
       </div>
     </div>
@@ -257,7 +257,7 @@ footer .wrap { display: grid; gap: 8px; }
       <div class="steps">
         <div class="pane"><span class="n">1</span><h3>Download</h3><p>Get <code>game-day.zip</code> from the <a href="https://github.com/Bla1ze/atgames-game-day/releases/latest">latest release</a> and unzip it. You get a folder named <code>game-day</code>.</p></div>
         <div class="pane"><span class="n">2</span><h3>Copy it to your USB drive</h3><p>Put the whole <code>game-day</code> folder inside the <code>external</code> folder on the USB drive you use with your cabinet, then plug the drive back in.</p></div>
-        <div class="pane"><span class="n">3</span><h3>Launch and pick your teams</h3><p>Open <b>Game Day</b> from your cabinet's external applications. The first time, it shows a code to scan with your phone to pick your teams.</p></div>
+        <div class="pane"><span class="n">3</span><h3>Launch and pick your teams</h3><p>Open <b>Game Day</b> from your cabinet's external applications. The first time, it shows a code to scan with your phone, and an address to open on a computer, so you can pick your teams.</p></div>
       </div>
       <div class="split" style="margin-top:26px">
         <div class="pane tree">USB drive
@@ -274,7 +274,7 @@ footer .wrap { display: grid; gap: 8px; }
           <h3>Updating</h3>
           <p style="color:var(--dim)">Game Day updates itself. When a new version is out, a banner appears at the top of the home screen: open it to read what's new, choose <b>Install</b>, then <b>Restart now</b>. Only the app is replaced; your teams and settings in <code>data</code> carry over.</p>
           <h3 style="margin-top:8px">Needs</h3>
-          <p style="color:var(--dim)">An AtGames Legends Pinball 4KP or HDP on Wi-Fi with internet, and a phone on the same Wi-Fi for setup.</p>
+          <p style="color:var(--dim)">An AtGames Legends Pinball 4KP or HDP on Wi-Fi with internet, and a phone or computer on the same network for setup.</p>
         </div>
       </div>
     </div>
@@ -284,10 +284,10 @@ footer .wrap { display: grid; gap: 8px; }
     <div class="wrap split">
       <div class="head" style="margin:0">
         <span class="cap">Setup</span>
-        <h2>Pick your teams from your phone</h2>
+        <h2>Pick your teams from your phone or computer</h2>
         <ol style="color:var(--dim); padding-left:22px; display:grid; gap:10px; margin:10px 0 0">
           <li>In Game Day, press <b>Start</b> (it opens by itself the first time). The playfield shows a QR code, the page's address and a 4-digit PIN.</li>
-          <li>Scan the code with your phone's camera. Your phone has to be on the same Wi-Fi as the cabinet.</li>
+          <li>Scan the code with your phone's camera, or type the address shown under it into a browser on your computer. Either way, it has to be on the same network as the cabinet.</li>
           <li>Choose a league, then tap your teams. Add as many as you like from any league, and put your favorite first: its division is the one on the home screen.</li>
           <li>Pick °C or °F, the 12- or 24-hour clock, and whether the live view takes over when a team starts playing.</li>
           <li>Enter the PIN from the cabinet and tap <b>Save to the cabinet</b>. The cabinet loads your teams right away.</li>
@@ -296,7 +296,7 @@ footer .wrap { display: grid; gap: 8px; }
       </div>
       <div class="row2" style="align-items:start">
         <figure><img src="assets/setup.jpg" alt="Setup screen on the cabinet with a QR code, the page address and a PIN" loading="lazy"><figcaption><b>On the cabinet</b></figcaption></figure>
-        <figure><img src="assets/phone.jpg" alt="The setup page on a phone: your teams, add a team, units and clock" loading="lazy"><figcaption><b>On your phone</b></figcaption></figure>
+        <figure><img src="assets/phone.jpg" alt="The setup page in a browser: your teams, add a team, units and clock" loading="lazy"><figcaption><b>On your phone or computer</b></figcaption></figure>
       </div>
     </div>
   </section>
@@ -327,26 +327,26 @@ footer .wrap { display: grid; gap: 8px; }
       </div>
       <div class="qa">
         <details>
-          <summary>The QR code doesn't open the setup page</summary>
+          <summary>The setup page won't open</summary>
           <div class="a">
             <ol>
-              <li>Check that your phone is on the same Wi-Fi as the cabinet, not on mobile data or a guest network.</li>
-              <li>Type the address shown under the code (for example <code>http://192.168.1.20:8080/</code>) into your phone's browser. Keep the <code>http://</code>, not https.</li>
+              <li>Check that your phone or computer is on the same network as the cabinet, not on mobile data or a guest network.</li>
+              <li>Type the address shown under the code (for example <code>http://192.168.1.20:8080/</code>) into a browser on your phone or computer. Keep the <code>http://</code>, not https.</li>
               <li>If the cabinet shows more than one address under "Also:", try those.</li>
               <li>If the screen says the setup page isn't available, the cabinet isn't on a network. Connect it to Wi-Fi in the cabinet's settings and open Game Day again.</li>
             </ol>
           </div>
         </details>
         <details>
-          <summary>The team list won't load on my phone</summary>
+          <summary>The team list won't load on the setup page</summary>
           <div class="a">
-            <p>Your phone gets the team lists from the cabinet, and the cabinet gets them from ESPN. If the page says the cabinet couldn't get the list, the cabinet can't reach the internet right now. Check its Wi-Fi, then choose the league again. Once a league has loaded, it's kept for a day.</p>
+            <p>The setup page gets the team lists from the cabinet, and the cabinet gets them from ESPN. If the page says the cabinet couldn't get the list, the cabinet can't reach the internet right now. Check its Wi-Fi, then choose the league again. Once a league has loaded, it's kept for a day.</p>
           </div>
         </details>
         <details>
           <summary>Saving says the PIN doesn't match</summary>
           <div class="a">
-            <p>The PIN changes every time Game Day starts. Use the one on the cabinet's screen right now; if you restarted the app, reload the page on your phone and enter the new PIN.</p>
+            <p>The PIN changes every time Game Day starts. Use the one on the cabinet's screen right now; if you restarted the app, reload the setup page and enter the new PIN.</p>
           </div>
         </details>
         <details>

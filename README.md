@@ -19,14 +19,15 @@ Your teams on your AtGames Legends Pinball cabinet (4KP and HDP).
 - **Backglass:** Team vs. Team. Both logos over a blend of the teams' colors,
   with the live score or when they play next.
 - **DMD:** the live score in large type; between games, the time and a ticker.
-- **Setup from your phone:** scan the code on the cabinet, pick your teams from
-  the NFL, NBA, WNBA, NHL, MLB, MLS, top soccer leagues or college, and save.
+- **Setup from your phone or computer:** scan the code on the cabinet, or open
+  the address it shows in any browser, then pick your teams from the NFL, NBA,
+  WNBA, NHL, MLB, MLS, top soccer leagues or college, and save.
 
 ## Install
 
 1. Download `game-day.zip` from the [latest release](https://github.com/Bla1ze/atgames-game-day/releases/latest) and unzip it.
 2. Copy the `game-day` folder into the `external` folder on your cabinet's USB drive.
-3. Open **Game Day** on the cabinet and scan the code to pick your teams.
+3. Open **Game Day** on the cabinet, then scan the code with your phone (or open the address it shows on a computer) to pick your teams.
 
 Game Day keeps everything in its own folder: `data` (your settings), `cache`
 (the latest scores) and `logos` (team logos).
