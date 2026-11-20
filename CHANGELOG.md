@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6 — 20 November 2026
+
+- The version number now shows at the bottom of the home screen, so you can
+  see an update took. (This release mainly tests the in-app updater.)
+
 ## 0.5 — 20 November 2026
 
 First public version.
