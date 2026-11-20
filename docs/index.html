@@ -272,7 +272,7 @@ footer .wrap { display: grid; gap: 8px; }
       └─ logos/     <span style="color:var(--faint)">← team logos (made by the app)</span></div>
         <div class="pane" style="padding:24px; display:grid; gap:10px">
           <h3>Updating</h3>
-          <p style="color:var(--dim)">Download the new release and replace <code>game-day.elf</code> (or the whole folder, keeping <code>data</code>). Your teams and settings live in <code>data</code>, so they carry over.</p>
+          <p style="color:var(--dim)">Game Day updates itself. When a new version is out, a banner appears at the top of the home screen: open it to read what's new, choose <b>Install</b>, then <b>Restart now</b>. Only the app is replaced; your teams and settings in <code>data</code> carry over.</p>
           <h3 style="margin-top:8px">Needs</h3>
           <p style="color:var(--dim)">An AtGames Legends Pinball 4KP or HDP on Wi-Fi with internet, and a phone on the same Wi-Fi for setup.</p>
         </div>
@@ -378,6 +378,10 @@ footer .wrap { display: grid; gap: 8px; }
           </div>
         </details>
         <details>
+          <summary>The update didn't finish</summary>
+          <div class="a"><p>Nothing is changed unless the whole update downloaded and checked out, so Game Day keeps working as before. Press A to close the message; it looks again the next time it starts. If it keeps failing, check the cabinet's internet connection, or download the release and replace <code>game-day.elf</code> by hand.</p></div>
+        </details>
+        <details>
           <summary>Something else is wrong. How do I send a log?</summary>
           <div class="a">
             <p>Game Day writes a log every time it runs. Take the USB drive out and find <code>external/game-day/logs/output.txt</code>. Open an <a href="https://github.com/Bla1ze/atgames-game-day/issues">issue on GitHub</a> with that file, which cabinet you have, and what you saw. A photo of the screen helps.</p>
@@ -415,6 +419,10 @@ footer .wrap { display: grid; gap: 8px; }
           <details>
             <summary>How up to date are the scores?</summary>
             <div class="a"><p>During a game your teams are in, Game Day refreshes about every 20 seconds; otherwise every couple of minutes. Scores come from ESPN, so they're as quick as ESPN's own scoreboard.</p></div>
+          </details>
+          <details>
+            <summary>How do I update Game Day?</summary>
+            <div class="a"><p>Game Day checks for a new version each time it starts. When there is one, a banner shows at the top of the home screen. Highlight it and press A to see what changed, then choose <b>Install</b> and <b>Restart now</b>. Your teams and settings are kept. You can also download the new release and replace <code>game-day.elf</code> by hand.</p></div>
           </details>
           <details>
             <summary>Do I need the Arcade Control Panel?</summary>

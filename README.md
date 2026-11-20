@@ -29,8 +29,11 @@ Your teams on your AtGames Legends Pinball cabinet (4KP and HDP).
 3. Open **Game Day** on the cabinet and scan the code to pick your teams.
 
 Game Day keeps everything in its own folder: `data` (your settings), `cache`
-(the latest scores) and `logos` (team logos). To update, replace
-`game-day.elf`; your settings carry over.
+(the latest scores) and `logos` (team logos).
+
+**Updates:** Game Day checks for a new version when it starts. A banner on the
+home screen offers it: read what's new, choose Install, then Restart now. Your
+settings carry over.
 
 Help and FAQ: [bla1ze.github.io/atgames-game-day](https://bla1ze.github.io/atgames-game-day/#help)
 

@@ -1,8 +1,11 @@
 # Changelog
 
-## 0.4 — 20 November 2026
+## 0.5 — 20 November 2026
 
 First public version.
+
+- Updates itself: a banner on the home screen offers new versions, shows
+  what changed, installs and restarts. Settings are kept.
 
 - Home screen: clock, next game with countdown and channel, weather where the
   game is played, today's scores, division standings.
