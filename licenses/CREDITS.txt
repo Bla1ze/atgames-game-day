@@ -1,0 +1,16 @@
+Game Day credits
+
+Fonts
+  Inter (SemiBold, ExtraBold), Copyright 2020 The Inter Project Authors.
+  SIL Open Font License 1.1 (Inter-OFL.txt).
+
+Libraries
+  stb_truetype and stb_image, by Sean Barrett. Public domain / MIT.
+  QR Code generator library, by Project Nayuki. MIT License.
+
+Data
+  Scores, schedules, standings and team logos: ESPN's public site API.
+  Team names and logos belong to their teams and leagues.
+  Weather and time zones: Open-Meteo (open-meteo.com), CC BY 4.0.
+
+Game Day is not affiliated with ESPN, any league or team, or AtGames.

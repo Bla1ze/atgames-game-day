@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Game Day for AtGames Legends Pinball</title>
+<meta name="description" content="Your teams on your AtGames Legends Pinball 4KP or HDP cabinet: live scores, next games, standings and game-day weather on the playfield, Team vs. Team on the backglass and the score on the DMD.">
+<link rel="canonical" href="https://bla1ze.github.io/atgames-game-day/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Game Day">
+<meta property="og:title" content="Game Day for AtGames Legends Pinball">
+<meta property="og:description" content="Live scores, next games, standings and Team vs. Team on your AtGames Legends Pinball cabinet.">
+<meta property="og:url" content="https://bla1ze.github.io/atgames-game-day/">
+<meta property="og:image" content="https://bla1ze.github.io/atgames-game-day/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Game Day: the home screen beside the backglass showing Yankees vs. Blue Jays with a live score">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Game Day for AtGames Legends Pinball">
+<meta name="twitter:description" content="Live scores, next games, standings and Team vs. Team on your AtGames Legends Pinball cabinet.">
+<meta name="twitter:image" content="https://bla1ze.github.io/atgames-game-day/assets/og-image.jpg">
+<link rel="icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* The Glass look of the app: frosted panes over a blurred wash of two team colors. */
+:root {
+  --ink: #0c0e14; --text: #ffffff; --dim: rgba(255,255,255,.78); --muted: rgba(255,255,255,.6); --faint: rgba(255,255,255,.42);
+  --frost: rgba(255,255,255,.07); --frost-hi: rgba(255,255,255,.11); --rim: rgba(255,255,255,.16); --focus: rgba(255,255,255,.9);
+  --dark: #12141c; --live: #ff4558; --c1: #1d4f9c; --c2: #b3123f;
+  --font: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--ink); color: var(--text); font: 400 17px/1.6 var(--font); overflow-x: hidden; }
+body::before { content: ""; position: fixed; inset: -10%; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--c1) 70%, transparent) 0, transparent 42%),
+              radial-gradient(circle at 88% 72%, color-mix(in srgb, var(--c2) 55%, transparent) 0, transparent 46%),
+              linear-gradient(180deg, #1c2030, #0a0c12); filter: blur(30px); }
+a { color: var(--text); }
+img { max-width: 100%; display: block; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left)); padding-right: max(18px, env(safe-area-inset-right)); }
+h1, h2, h3 { font-weight: 800; letter-spacing: -.025em; line-height: 1.1; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(30px, 4vw, 42px); }
+h3 { font-size: 19px; letter-spacing: -.01em; }
+p { margin: 0; }
+.cap { font-size: 12.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.lead { color: var(--dim); font-size: 18.5px; max-width: 62ch; }
+.pane { background: var(--frost); border: 1px solid var(--rim); border-radius: 24px; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+
+/* Top bar */
+.bar { position: sticky; top: 0; z-index: 10; background: rgba(12,14,20,.62); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,.08); }
+.bar .wrap { display: flex; align-items: center; gap: 18px; height: 62px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; text-decoration: none; letter-spacing: -.02em; font-size: 18px; }
+.brand img { width: 30px; height: 30px; border-radius: 8px; object-fit: cover; object-position: top; }
+.bar nav { margin-left: auto; display: flex; gap: 4px; flex-wrap: nowrap; overflow-x: auto; }
+.bar nav a { text-decoration: none; color: var(--dim); font-weight: 600; font-size: 15px; padding: 7px 12px; border-radius: 999px; white-space: nowrap; }
+.bar nav a:hover, .bar nav a:focus-visible { background: var(--frost-hi); color: var(--text); }
+@media (max-width: 720px) { .bar nav a.opt { display: none; } }
+
+/* Buttons */
+.btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; font-weight: 800; text-decoration: none; font-size: 16px; }
+.btn.main { background: var(--focus); color: var(--dark); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.btn.alt { background: var(--frost-hi); border: 1px solid var(--rim); }
+.btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+/* Hero */
+.hero { padding: 64px 0 40px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 40px; align-items: center; }
+.hero h1 { font-size: clamp(46px, 7vw, 80px); }
+.hero .stack { display: grid; gap: 22px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; background: var(--live); padding: 6px 14px 6px 12px; border-radius: 999px; font-weight: 800; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; width: fit-content; }
+.chip i { width: 8px; height: 8px; border-radius: 50%; background: #fff; display: block; }
+@media (prefers-reduced-motion: no-preference) { .chip i { animation: pulse 1.6s ease-in-out infinite; } }
+@keyframes pulse { 50% { opacity: .3; } }
+.shot-cluster { position: relative; min-height: 460px; }
+.shot-cluster .pf { position: absolute; left: 0; top: 0; width: 46%; border-radius: 18px; box-shadow: 0 30px 70px rgba(0,0,0,.55); border: 1px solid var(--rim); }
+.shot-cluster .bg { position: absolute; right: 0; top: 14%; width: 70%; border-radius: 14px; box-shadow: 0 30px 70px rgba(0,0,0,.55); border: 1px solid var(--rim); }
+.shot-cluster .dmd { position: absolute; right: 8%; bottom: 0; width: 44%; border-radius: 12px; box-shadow: 0 30px 70px rgba(0,0,0,.55); border: 1px solid var(--rim); }
+@media (max-width: 880px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); }
+  .shot-cluster { min-height: 0; aspect-ratio: 1 / .92; }
+}
+
+section { padding: 64px 0; }
+.head { display: grid; gap: 12px; margin-bottom: 30px; }
+
+/* Features */
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.cards .pane { padding: 24px; display: grid; gap: 10px; align-content: start; }
+.cards p { color: var(--dim); font-size: 16px; }
+.ico { width: 42px; height: 42px; border-radius: 13px; background: var(--frost-hi); border: 1px solid var(--rim); display: grid; place-items: center; }
+.ico svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 900px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .cards { grid-template-columns: minmax(0, 1fr); } }
+
+/* Screens */
+.gallery { display: grid; gap: 26px; }
+.row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+figure { margin: 0; display: grid; gap: 10px; min-width: 0; }
+figure img { border-radius: 16px; border: 1px solid var(--rim); box-shadow: 0 18px 40px rgba(0,0,0,.4); }
+figcaption { display: grid; gap: 2px; }
+figcaption b { font-weight: 800; }
+figcaption span { color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) { .row3, .row2 { grid-template-columns: minmax(0, 1fr); } .row3 figure { max-width: 380px; } }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: s; }
+.steps .pane { padding: 24px; display: grid; gap: 10px; align-content: start; }
+.steps .n { width: 36px; height: 36px; border-radius: 50%; background: var(--focus); color: var(--dark); font-weight: 800; display: grid; place-items: center; }
+.steps p { color: var(--dim); font-size: 16px; }
+@media (max-width: 860px) { .steps { grid-template-columns: minmax(0, 1fr); } }
+code { font: 600 .92em ui-monospace, SFMono-Regular, Menlo, monospace; background: rgba(255,255,255,.1); padding: 2px 6px; border-radius: 6px; overflow-wrap: anywhere; }
+.tree { font: 500 14.5px/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--dim); padding: 18px 22px; overflow-x: auto; white-space: pre; }
+
+.split { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 26px; align-items: start; }
+@media (max-width: 860px) { .split { grid-template-columns: minmax(0, 1fr); } }
+
+/* Controls */
+table { width: 100%; border-collapse: collapse; }
+td, th { text-align: left; padding: 14px 18px; border-top: 1px solid rgba(255,255,255,.09); vertical-align: top; }
+tr:first-child td, tr:first-child th { border-top: 0; }
+td:first-child { width: 36%; font-weight: 800; }
+td { color: var(--dim); }
+.table { overflow-x: auto; }
+
+/* Help and FAQ */
+.qa { display: grid; gap: 10px; }
+details { background: var(--frost); border: 1px solid var(--rim); border-radius: 18px; }
+details[open] { background: var(--frost-hi); }
+summary { cursor: pointer; list-style: none; padding: 17px 22px; font-weight: 800; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-size: 24px; font-weight: 400; color: var(--muted); line-height: 1; flex: none; }
+details[open] summary::after { content: "–"; }
+summary:focus-visible { outline: 3px solid #fff; outline-offset: -3px; border-radius: 18px; }
+details .a { padding: 0 22px 20px; color: var(--dim); display: grid; gap: 10px; max-width: 78ch; }
+details .a ol, details .a ul { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.groups h3 { margin-bottom: 12px; }
+@media (max-width: 860px) { .groups { grid-template-columns: minmax(0, 1fr); } }
+
+footer { padding: 40px 0 60px; color: var(--faint); font-size: 14.5px; border-top: 1px solid rgba(255,255,255,.08); }
+footer .wrap { display: grid; gap: 8px; }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/icon.png" alt="">Game Day</a>
+    <nav aria-label="Sections">
+      <a class="opt" href="#features">Features</a>
+      <a class="opt" href="#screens">Screens</a>
+      <a href="#install">Install</a>
+      <a href="#help">Help</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div class="stack">
+        <span class="chip"><i></i>Live</span>
+        <h1>Game Day</h1>
+        <p class="lead">Your teams on your AtGames Legends Pinball cabinet. Live scores, next games, standings and the weather where they're playing on the playfield, Team vs. Team on the backglass, and the score on the DMD.</p>
+        <div class="btns">
+          <a class="btn main" href="https://github.com/Bla1ze/atgames-game-day/releases/latest">Download</a>
+          <a class="btn alt" href="#install">How to install</a>
+        </div>
+        <p class="cap">Free · For the 4KP and HDP · NFL, NBA, NHL, MLB, MLS, soccer and college</p>
+      </div>
+      <div class="shot-cluster" aria-hidden="true">
+        <img class="pf" src="assets/home.jpg" alt="">
+        <img class="bg" src="assets/backglass-live.jpg" alt="">
+        <img class="dmd" src="assets/dmd-live.jpg" alt="">
+      </div>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="head">
+        <span class="cap">What it shows</span>
+        <h2>All three screens, all about your teams</h2>
+      </div>
+      <div class="cards">
+        <div class="pane">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18M8 4v6M16 4v6"/></svg></div>
+          <h3>Your teams, at a glance</h3>
+          <p>The time, your next game with a countdown and channel, today's scores and your division standings, on one screen.</p>
+        </div>
+        <div class="pane">
+          <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></div>
+          <h3>The live view</h3>
+          <p>When one of your teams starts playing, the cabinet switches to the game: score, clock, line score, scoring plays and team stats. Baseball adds runners on base, the count, pitcher and batter.</p>
+        </div>
+        <div class="pane">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="8" height="10" rx="2"/><rect x="14" y="6" width="8" height="10" rx="2"/><path d="M12 9v4"/></svg></div>
+          <h3>Team vs. Team on the backglass</h3>
+          <p>The two teams' logos face to face over a blend of their colors, with the live score between them, or when and where they play next. Both logos flash when either team scores.</p>
+        </div>
+        <div class="pane">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M7 10v4M11 10v4M15 10h2v4h-2"/></svg></div>
+          <h3>The score on the DMD</h3>
+          <p>The live score in large type with the period, quarter or inning, readable across the room. Between games: the time, with a ticker of finals and what's next.</p>
+        </div>
+        <div class="pane">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M17 18a4 4 0 0 0 0-8 6 6 0 0 0-11.6 1.5A3.5 3.5 0 0 0 6 18z"/></svg></div>
+          <h3>Weather where they play</h3>
+          <p>The forecast for the city your next game is in, at game time, with the hours around it. Indoor arenas are marked, and the ballpark's wind shows during baseball.</p>
+        </div>
+        <div class="pane">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+          <h3>Set up from your phone</h3>
+          <p>Scan the code on the cabinet, pick your teams from any league, and save. No typing on the cabinet, no account, nothing to sign up for.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <div class="wrap">
+      <div class="head">
+        <span class="cap">Screens</span>
+        <h2>On the cabinet</h2>
+        <p class="lead">Screenshots from the cabinet simulator. Teams, logos and colors follow whoever you pick.</p>
+      </div>
+      <div class="gallery">
+        <div class="row3">
+          <figure><img src="assets/home.jpg" alt="Home screen: clock, next game, weather at game time, tonight's scores and division standings" loading="lazy"><figcaption><b>Home</b><span>Your next game, the weather where it's played, scores and standings.</span></figcaption></figure>
+          <figure><img src="assets/live.jpg" alt="Live view of a baseball game: score, diamond with runners, count, pitcher and batter, line score" loading="lazy"><figcaption><b>Live view</b><span>Takes over when one of your teams is playing.</span></figcaption></figure>
+          <figure><img src="assets/game.jpg" alt="Game page before tip-off with time, venue, weather and season averages" loading="lazy"><figcaption><b>Game page</b><span>Any game from the scores, opened with A.</span></figcaption></figure>
+        </div>
+        <div class="row2">
+          <figure><img src="assets/backglass-live.jpg" alt="Backglass: Yankees and Blue Jays logos with a live 3 to 4 score" loading="lazy"><figcaption><b>Backglass, during a game</b><span>Team vs. Team with the live score.</span></figcaption></figure>
+          <figure><img src="assets/backglass-next.jpg" alt="Backglass: Raptors at Pistons with the start time and a countdown" loading="lazy"><figcaption><b>Backglass, before a game</b><span>When and where they play next.</span></figcaption></figure>
+          <figure><img src="assets/dmd-live.jpg" alt="DMD: NYY 3, TOR 4, bottom of the 7th, 1 out, 2 and 1 count" loading="lazy"><figcaption><b>DMD, during a game</b><span>The score, inning, outs and count.</span></figcaption></figure>
+          <figure><img src="assets/dmd-clock.jpg" alt="DMD: the time with the next game underneath" loading="lazy"><figcaption><b>DMD, between games</b><span>The time and a ticker of your teams.</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <div class="head">
+        <span class="cap">Install</span>
+        <h2>Get started</h2>
+      </div>
+      <div class="steps">
+        <div class="pane"><span class="n">1</span><h3>Download</h3><p>Get <code>game-day.zip</code> from the <a href="https://github.com/Bla1ze/atgames-game-day/releases/latest">latest release</a> and unzip it. You get a folder named <code>game-day</code>.</p></div>
+        <div class="pane"><span class="n">2</span><h3>Copy it to your USB drive</h3><p>Put the whole <code>game-day</code> folder inside the <code>external</code> folder on the USB drive you use with your cabinet, then plug the drive back in.</p></div>
+        <div class="pane"><span class="n">3</span><h3>Launch and pick your teams</h3><p>Open <b>Game Day</b> from your cabinet's external applications. The first time, it shows a code to scan with your phone to pick your teams.</p></div>
+      </div>
+      <div class="split" style="margin-top:26px">
+        <div class="pane tree">USB drive
+└─ external
+   └─ game-day
+      ├─ game-day.elf
+      ├─ game-day.png
+      ├─ game-day.xml
+      ├─ licenses/
+      ├─ data/      <span style="color:var(--faint)">← your settings (made by the app)</span>
+      ├─ cache/     <span style="color:var(--faint)">← the latest scores (made by the app)</span>
+      └─ logos/     <span style="color:var(--faint)">← team logos (made by the app)</span></div>
+        <div class="pane" style="padding:24px; display:grid; gap:10px">
+          <h3>Updating</h3>
+          <p style="color:var(--dim)">Download the new release and replace <code>game-day.elf</code> (or the whole folder, keeping <code>data</code>). Your teams and settings live in <code>data</code>, so they carry over.</p>
+          <h3 style="margin-top:8px">Needs</h3>
+          <p style="color:var(--dim)">An AtGames Legends Pinball 4KP or HDP on Wi-Fi with internet, and a phone on the same Wi-Fi for setup.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <div class="wrap split">
+      <div class="head" style="margin:0">
+        <span class="cap">Setup</span>
+        <h2>Pick your teams from your phone</h2>
+        <ol style="color:var(--dim); padding-left:22px; display:grid; gap:10px; margin:10px 0 0">
+          <li>In Game Day, press <b>Start</b> (it opens by itself the first time). The playfield shows a QR code, the page's address and a 4-digit PIN.</li>
+          <li>Scan the code with your phone's camera. Your phone has to be on the same Wi-Fi as the cabinet.</li>
+          <li>Choose a league, then tap your teams. Add as many as you like from any league, and put your favorite first: its division is the one on the home screen.</li>
+          <li>Pick °C or °F, the 12- or 24-hour clock, and whether the live view takes over when a team starts playing.</li>
+          <li>Enter the PIN from the cabinet and tap <b>Save to the cabinet</b>. The cabinet loads your teams right away.</li>
+        </ol>
+        <p style="color:var(--muted); margin-top:12px">Times follow your cabinet's own clock and time zone, so there's nothing to set.</p>
+      </div>
+      <div class="row2" style="align-items:start">
+        <figure><img src="assets/setup.jpg" alt="Setup screen on the cabinet with a QR code, the page address and a PIN" loading="lazy"><figcaption><b>On the cabinet</b></figcaption></figure>
+        <figure><img src="assets/phone.jpg" alt="The setup page on a phone: your teams, add a team, units and clock" loading="lazy"><figcaption><b>On your phone</b></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="controls">
+    <div class="wrap">
+      <div class="head">
+        <span class="cap">Controls</span>
+        <h2>Flippers and a few buttons</h2>
+      </div>
+      <div class="pane table">
+        <table>
+          <tr><td>Flippers (or left / right)</td><td>Move between cards on the home screen. On a game page, step through the other games.</td></tr>
+          <tr><td>A</td><td>Open the highlighted card: your next game, the first game in Scores, or the full standings.</td></tr>
+          <tr><td>Start</td><td>Show the setup code and PIN, or close it.</td></tr>
+          <tr><td>B / Back</td><td>Back to the home screen. On the home screen, leave Game Day.</td></tr>
+        </table>
+      </div>
+      <p style="color:var(--muted); margin-top:14px">Game pages and standings go back to the home screen by themselves after a minute. The live view stays up until the game ends or you press Back.</p>
+    </div>
+  </section>
+
+  <section id="help">
+    <div class="wrap">
+      <div class="head">
+        <span class="cap">Help</span>
+        <h2>If something isn't right</h2>
+      </div>
+      <div class="qa">
+        <details>
+          <summary>The QR code doesn't open the setup page</summary>
+          <div class="a">
+            <ol>
+              <li>Check that your phone is on the same Wi-Fi as the cabinet, not on mobile data or a guest network.</li>
+              <li>Type the address shown under the code (for example <code>http://192.168.1.20:8080/</code>) into your phone's browser. Keep the <code>http://</code>, not https.</li>
+              <li>If the cabinet shows more than one address under "Also:", try those.</li>
+              <li>If the screen says the setup page isn't available, the cabinet isn't on a network. Connect it to Wi-Fi in the cabinet's settings and open Game Day again.</li>
+            </ol>
+          </div>
+        </details>
+        <details>
+          <summary>The team list won't load on my phone</summary>
+          <div class="a">
+            <p>Your phone gets the team lists from the cabinet, and the cabinet gets them from ESPN. If the page says the cabinet couldn't get the list, the cabinet can't reach the internet right now. Check its Wi-Fi, then choose the league again. Once a league has loaded, it's kept for a day.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Saving says the PIN doesn't match</summary>
+          <div class="a">
+            <p>The PIN changes every time Game Day starts. Use the one on the cabinet's screen right now; if you restarted the app, reload the page on your phone and enter the new PIN.</p>
+          </div>
+        </details>
+        <details>
+          <summary>The time is wrong</summary>
+          <div class="a">
+            <p>Game Day uses your cabinet's own clock and time zone. If the clock is off, it's off on the cabinet too: check the cabinet's time settings and that it's online (it sets its clock from the internet). Game times use the same clock, so they're correct whenever the cabinet's is.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Logos show as letters in colored squares</summary>
+          <div class="a">
+            <p>That's the stand-in while a logo downloads. Each logo is downloaded once and kept in <code>game-day/logos</code>, so after the first time they show at once. If a download fails, Game Day tries again a couple of minutes later.</p>
+          </div>
+        </details>
+        <details>
+          <summary>It says "Offline" at the top</summary>
+          <div class="a">
+            <p>The latest refresh didn't reach the internet, so you're seeing the last scores it saved, and the label says how old they are. It clears by itself once the cabinet is back online.</p>
+          </div>
+        </details>
+        <details>
+          <summary>The live view didn't open when my team started</summary>
+          <div class="a">
+            <ul>
+              <li>It opens within about 20 seconds of the game going live, and only once per game. If you pressed Back, open the game again from Scores.</li>
+              <li>Check that the live view is on in setup.</li>
+              <li>It doesn't open over the setup screen. Close setup with Start.</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>Something else is wrong. How do I send a log?</summary>
+          <div class="a">
+            <p>Game Day writes a log every time it runs. Take the USB drive out and find <code>external/game-day/logs/output.txt</code>. Open an <a href="https://github.com/Bla1ze/atgames-game-day/issues">issue on GitHub</a> with that file, which cabinet you have, and what you saw. A photo of the screen helps.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="head">
+        <span class="cap">FAQ</span>
+        <h2>Questions</h2>
+      </div>
+      <div class="groups">
+        <div class="qa">
+          <h3>About Game Day</h3>
+          <details>
+            <summary>Which cabinets does it work on?</summary>
+            <div class="a"><p>AtGames Legends Pinball 4KP and HDP. Game Day uses the playfield, the backglass and the DMD, and it finds the right screen on each model by itself.</p></div>
+          </details>
+          <details>
+            <summary>Which leagues can I follow?</summary>
+            <div class="a"><p>NFL, NBA, WNBA, NHL, MLB, MLS, the Premier League, LaLiga, the Bundesliga, Serie A, Ligue 1, college football, and men's and women's college basketball.</p></div>
+          </details>
+          <details>
+            <summary>How many teams can I follow?</summary>
+            <div class="a"><p>Up to 12, from any mix of leagues. The first team in your list decides which standings the home screen shows; you can change the order in setup.</p></div>
+          </details>
+          <details>
+            <summary>Does it need the internet?</summary>
+            <div class="a"><p>Yes, for scores, schedules and weather. Without it, Game Day shows the last data it saved and says it's offline.</p></div>
+          </details>
+          <details>
+            <summary>How up to date are the scores?</summary>
+            <div class="a"><p>During a game your teams are in, Game Day refreshes about every 20 seconds; otherwise every couple of minutes. Scores come from ESPN, so they're as quick as ESPN's own scoreboard.</p></div>
+          </details>
+          <details>
+            <summary>Do I need the Arcade Control Panel?</summary>
+            <div class="a"><p>No. Everything works with the flippers, A, B and Start.</p></div>
+          </details>
+        </div>
+        <div class="qa">
+          <h3>Privacy and files</h3>
+          <details>
+            <summary>Do I need an account? What does it collect?</summary>
+            <div class="a"><p>No account, and nothing is collected. Game Day asks ESPN for scores and Open-Meteo for weather, like any website would. Your settings stay on your USB drive.</p></div>
+          </details>
+          <details>
+            <summary>Where does it keep its files?</summary>
+            <div class="a"><p>Only inside its own folder, <code>external/game-day</code>: <code>data</code> holds your settings, <code>cache</code> the latest scores and weather, and <code>logos</code> the team logos. Nothing is written anywhere else on the cabinet or the drive.</p></div>
+          </details>
+          <details>
+            <summary>Who can change my settings?</summary>
+            <div class="a"><p>Only someone on your Wi-Fi who can see the PIN on the cabinet's screen. The setup page runs only while Game Day is open, and the PIN changes every time it starts.</p></div>
+          </details>
+          <details>
+            <summary>Does it change anything on my cabinet?</summary>
+            <div class="a"><p>No. It runs like any external application from the USB drive and doesn't touch the cabinet's firmware or settings. Take the folder off the drive and it's gone.</p></div>
+          </details>
+          <details>
+            <summary>Can it share a USB drive with my other apps?</summary>
+            <div class="a"><p>Yes. Game Day lives in its own folder under <code>external</code>, next to any other apps on the drive.</p></div>
+          </details>
+          <details>
+            <summary>Is it affiliated with ESPN, the leagues or AtGames?</summary>
+            <div class="a"><p>No. Game Day is a free, independent app. Team names and logos belong to their teams and leagues.</p></div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Game Day by Bla1ze. Free, for AtGames Legends Pinball 4KP and HDP. <a href="https://github.com/Bla1ze/atgames-game-day">Releases and issues on GitHub</a>.</p>
+    <p>Scores, schedules, standings and logos from ESPN. Weather from <a href="https://open-meteo.com/">Open-Meteo</a>. Not affiliated with ESPN, any league or team, or AtGames.</p>
+  </div>
+</footer>
+</body>
+</html>

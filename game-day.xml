@@ -1,0 +1,9 @@
+<root>
+    <name>Game Day</name>
+    <developer>Bla1ze</developer>
+    <category>Media</category>
+    <year>2026</year>
+    <copyright>Bla1ze</copyright>
+    <description>Your teams on the cabinet: live scores, next games, standings and game-day weather, with Team vs. Team on the backglass.</description>
+    <logging>true</logging>
+</root>
