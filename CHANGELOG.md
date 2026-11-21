@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.8 — 20 November 2026
+
+**Score alerts, a horn, and a hands-off mode.**
+
+- **Score alerts:** when one of your teams scores, a banner slides down on any
+  screen and the DMD shows GOAL!, TOUCHDOWN!, RUN! and the score. Basketball
+  alerts when your team takes the lead.
+- **Score horn:** an arena horn through the cabinet's speakers. Off unless you
+  switch it on.
+- **Hands-off mode:** leave the cabinet alone for a minute and it shows your
+  live game, or each team's page in turn.
+- **Settings on the cabinet:** press Start for the score horn, hands-off mode
+  and the live view switches, right on the playfield.
+- **Coming up:** each team page lists its next few games.
+- **Live football and hockey:** a field with the ball and down and distance;
+  shots on goal for hockey.
+- Play times read "Q2 7:58" instead of "2nd Quarter".
+- **Fixed:** the LIVE tag's text sat low.
+
 ## 0.7 — 20 November 2026
 
 **A card for every team you follow, and a page for each one.**
