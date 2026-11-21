@@ -130,7 +130,7 @@ td { color: var(--dim); }
 .table { overflow-x: auto; }
 
 /* Help and FAQ */
-.qa { display: grid; gap: 10px; }
+.qa { display: grid; gap: 10px; align-content: start; }
 details { background: var(--frost); border: 1px solid var(--rim); border-radius: 18px; }
 details[open] { background: var(--frost-hi); }
 summary { cursor: pointer; list-style: none; padding: 17px 22px; font-weight: 800; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
@@ -140,8 +140,8 @@ details[open] summary::after { content: "–"; }
 summary:focus-visible { outline: 3px solid #fff; outline-offset: -3px; border-radius: 18px; }
 details .a { padding: 0 22px 20px; color: var(--dim); display: grid; gap: 10px; max-width: 78ch; }
 details .a ol, details .a ul { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
-.groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
-.groups h3 { margin-bottom: 12px; }
+.groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
+.groups h3 { margin: 0 0 2px; }
 @media (max-width: 860px) { .groups { grid-template-columns: minmax(0, 1fr); } }
 
 footer { padding: 40px 0 60px; color: var(--faint); font-size: 14.5px; border-top: 1px solid rgba(255,255,255,.08); }
