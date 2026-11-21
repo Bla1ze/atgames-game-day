@@ -19,15 +19,17 @@ Your teams on your AtGames Legends Pinball cabinet (4KP and HDP).
 - **Backglass:** Team vs. Team. Both logos over a blend of the teams' colors,
   with the live score or when they play next.
 - **DMD:** the live score in large type; between games, the time and a ticker.
-- **Setup from your phone or computer:** scan the code on the cabinet, or open
-  the address it shows in any browser, then pick your teams from the NFL, NBA,
-  WNBA, NHL, MLB, MLS, top soccer leagues or college, and save.
+- **Pick your teams on the cabinet:** choose from a grid of logos with the
+  flippers and Start, from the NFL, NBA, WNBA, NHL, MLB, MLS, top soccer
+  leagues or college. Or use your phone or computer.
+- **No control panel needed:** the flippers move, Start selects, Rewind goes
+  back. With the panel plugged in, A and B work too.
 
 ## Install
 
 1. Download `game-day.zip` from the [latest release](https://github.com/Bla1ze/atgames-game-day/releases/latest) and unzip it.
 2. Copy the `game-day` folder into the `external` folder on your cabinet's USB drive.
-3. Open **Game Day** on the cabinet, then scan the code with your phone (or open the address it shows on a computer) to pick your teams.
+3. Open **Game Day** on the cabinet and pick your teams right there (or scan the code to use your phone or computer).
 
 Game Day keeps everything in its own folder: `data` (your settings), `cache`
 (the latest scores) and `logos` (team logos).
@@ -37,6 +39,11 @@ home screen offers it: read what's new, choose Install, then Restart now. Your
 settings carry over.
 
 Help and FAQ: [bla1ze.github.io/atgames-game-day](https://bla1ze.github.io/atgames-game-day/#help)
+
+## Support
+
+Game Day is free. Donations are never required, but they're appreciated:
+[donate with PayPal](https://www.paypal.me/Bla1ze81).
 
 ## Credits
 

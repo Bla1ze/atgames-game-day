@@ -144,6 +144,11 @@ details .a ol, details .a ul { margin: 0; padding-left: 22px; display: grid; gap
 .groups h3 { margin: 0 0 2px; }
 @media (max-width: 860px) { .groups { grid-template-columns: minmax(0, 1fr); } }
 
+.setup-shots img { aspect-ratio: 9 / 16; width: 100%; object-fit: cover; object-position: top; }
+.pp { width: 18px; height: 18px; fill: currentColor; flex: none; }
+.support .pane { padding: 28px; display: flex; gap: 24px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.support p { color: var(--dim); max-width: 60ch; }
+.support p b { color: var(--text); }
 footer { padding: 40px 0 60px; color: var(--faint); font-size: 14.5px; border-top: 1px solid rgba(255,255,255,.08); }
 footer .wrap { display: grid; gap: 8px; }
 </style>
@@ -173,6 +178,7 @@ footer .wrap { display: grid; gap: 8px; }
         <div class="btns">
           <a class="btn main" href="https://github.com/Bla1ze/atgames-game-day/releases/latest">Download</a>
           <a class="btn alt" href="#install">How to install</a>
+          <a class="btn alt" href="#support"><svg class="pp" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.016 19.198h-4.2a.562.562 0 0 1-.555-.65L5.093.584A.692.692 0 0 1 5.776 0h7.222c3.417 0 5.904 2.488 5.846 5.5-.006.25-.027.5-.066.747A6.794 6.794 0 0 1 12.071 12H8.743a.69.69 0 0 0-.682.583l-.325 2.056-.013.083-.692 4.39-.015.087zM19.79 6.142c-.01.087-.01.175-.023.261a7.76 7.76 0 0 1-7.695 6.598H9.007l-.283 1.795-.013.083-.692 4.39-.134.843-.014.088H6.86l-.497 3.15a.562.562 0 0 0 .555.65h3.612c.34 0 .63-.249.683-.585l.952-6.031a.692.692 0 0 1 .683-.584h2.126a6.793 6.793 0 0 0 6.707-5.752c.306-1.95-.466-3.744-1.89-4.906z"/></svg>Donate</a>
         </div>
         <p class="cap">Free · For the 4KP and HDP · NFL, NBA, NHL, MLB, MLS, soccer and college</p>
       </div>
@@ -218,8 +224,8 @@ footer .wrap { display: grid; gap: 8px; }
         </div>
         <div class="pane">
           <div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="14" height="10" rx="1.5"/><path d="M6 18h6M9 14v4"/><rect x="17" y="8" width="5" height="11" rx="1.2"/></svg></div>
-          <h3>Set up from your phone or computer</h3>
-          <p>Scan the code on the cabinet with your phone, or type the address it shows into a browser on your computer. Pick your teams from any league and save. No typing on the cabinet, no account, nothing to sign up for.</p>
+          <h3>Pick your teams on the cabinet</h3>
+          <p>Choose a league and pick your teams from a grid of logos with the flippers and Start. Prefer typing? The same page opens on your phone or computer. No account, nothing to sign up for.</p>
         </div>
       </div>
     </div>
@@ -234,7 +240,7 @@ footer .wrap { display: grid; gap: 8px; }
       </div>
       <div class="gallery">
         <div class="row3">
-          <figure><img src="assets/home.jpg" alt="Home: a card per followed team, the Raptors live against Detroit and the Canadiens' next game, then today's scores" loading="lazy"><figcaption><b>Home</b><span>A card for each team you follow, then today's scores.</span></figcaption></figure>
+          <figure><img src="assets/home.jpg" alt="Home: a card per followed team, the Raptors live against Detroit and the Canadiens' next game, then today's scores" loading="lazy"><figcaption><b>Home</b><span>A card for each team you follow, today's scores, then Teams and settings.</span></figcaption></figure>
           <figure><img src="assets/team.jpg" alt="Team page for the Montreal Canadiens: next game with weather, last game, Atlantic Division standings" loading="lazy"><figcaption><b>Team page</b><span>Next game and weather, last game, standings.</span></figcaption></figure>
           <figure><img src="assets/scores.jpg" alt="Today's scores: every game in the followed leagues, one live" loading="lazy"><figcaption><b>Today's scores</b><span>Every game in your leagues; open any one.</span></figcaption></figure>
         </div>
@@ -262,7 +268,7 @@ footer .wrap { display: grid; gap: 8px; }
       <div class="steps">
         <div class="pane"><span class="n">1</span><h3>Download</h3><p>Get <code>game-day.zip</code> from the <a href="https://github.com/Bla1ze/atgames-game-day/releases/latest">latest release</a> and unzip it. You get a folder named <code>game-day</code>.</p></div>
         <div class="pane"><span class="n">2</span><h3>Copy it to your USB drive</h3><p>Put the whole <code>game-day</code> folder inside the <code>external</code> folder on the USB drive you use with your cabinet, then plug the drive back in.</p></div>
-        <div class="pane"><span class="n">3</span><h3>Launch and pick your teams</h3><p>Open <b>Game Day</b> from your cabinet's external applications. The first time, it shows a code to scan with your phone, and an address to open on a computer, so you can pick your teams.</p></div>
+        <div class="pane"><span class="n">3</span><h3>Launch and pick your teams</h3><p>Open <b>Game Day</b> from your cabinet's external applications. The first time, it opens Teams and settings: pick your teams right there, or scan the code to use your phone.</p></div>
       </div>
       <div class="split" style="margin-top:26px">
         <div class="pane tree">USB drive
@@ -279,29 +285,44 @@ footer .wrap { display: grid; gap: 8px; }
           <h3>Updating</h3>
           <p style="color:var(--dim)">Game Day updates itself. When a new version is out, a banner appears at the top of the home screen: open it to read what's new, choose <b>Install</b>, then <b>Restart now</b>. Only the app is replaced; your teams and settings in <code>data</code> carry over.</p>
           <h3 style="margin-top:8px">Needs</h3>
-          <p style="color:var(--dim)">An AtGames Legends Pinball 4KP or HDP on Wi-Fi with internet, and a phone or computer on the same network for setup.</p>
+          <p style="color:var(--dim)">An AtGames Legends Pinball 4KP or HDP on Wi-Fi with internet. A phone or computer is optional.</p>
         </div>
       </div>
     </div>
   </section>
 
   <section id="setup">
-    <div class="wrap split">
-      <div class="head" style="margin:0">
+    <div class="wrap">
+      <div class="head">
         <span class="cap">Setup</span>
-        <h2>Pick your teams from your phone or computer</h2>
-        <ol style="color:var(--dim); padding-left:22px; display:grid; gap:10px; margin:10px 0 0">
-          <li>In Game Day, press <b>Start</b> (it opens by itself the first time). The playfield shows a QR code, the page's address and a 4-digit PIN.</li>
-          <li>Scan the code with your phone's camera, or type the address shown under it into a browser on your computer. Either way, it has to be on the same network as the cabinet.</li>
-          <li>Choose a league, then tap your teams. Add as many as you like from any league, and put your favorite first: its division is the one on the home screen.</li>
-          <li>Pick °C or °F, the 12- or 24-hour clock, and whether the live view takes over when a team starts playing.</li>
-          <li>Enter the PIN from the cabinet and tap <b>Save to the cabinet</b>. The cabinet loads your teams right away.</li>
-        </ol>
-        <p style="color:var(--muted); margin-top:12px">Times follow your cabinet's own clock and time zone, so there's nothing to set.</p>
+        <h2>Pick your teams</h2>
+        <p class="lead">Right on the cabinet, with the flippers and Start. Or from your phone or computer if you'd rather type.</p>
       </div>
-      <div class="row2" style="align-items:start">
-        <figure><img src="assets/setup.jpg" alt="Teams and settings on the cabinet: a QR code, the page address, a PIN and switches for the score horn, hands-off mode and the live view" loading="lazy"><figcaption><b>On the cabinet</b></figcaption></figure>
-        <figure><img src="assets/phone.jpg" alt="The setup page in a browser: your teams with logos, add a team, units, clock, live view, score horn and hands-off mode" loading="lazy"><figcaption><b>On your phone or computer</b></figcaption></figure>
+      <div class="split">
+        <div class="pane" style="padding:24px; display:grid; gap:10px">
+          <h3>On the cabinet</h3>
+          <ol style="color:var(--dim); padding-left:22px; display:grid; gap:8px; margin:0">
+            <li>Open <b>Teams and settings</b>: the last card on the home screen (it opens by itself the first time).</li>
+            <li>Choose <b>Your teams</b>, then <b>Add a team</b>, and pick a league.</li>
+            <li>Move through the logos with the flippers and press <b>Start</b> to add or remove a team. A red check marks the ones you follow; hold a flipper to scroll fast.</li>
+            <li>Back in Your teams, press Start on a team to move it up or down, or remove it. The first team's division is the one on the home screen.</li>
+            <li>The switches below Your teams turn the score horn, hands-off mode and the live view on or off.</li>
+          </ol>
+        </div>
+        <div class="pane" style="padding:24px; display:grid; gap:10px">
+          <h3>On your phone or computer</h3>
+          <ol style="color:var(--dim); padding-left:22px; display:grid; gap:8px; margin:0">
+            <li>Teams and settings shows a QR code, the page's address and a 4-digit PIN.</li>
+            <li>Scan the code, or type the address into a browser. It has to be on the same network as the cabinet.</li>
+            <li>Choose a league and tap your teams, set °C or °F and the clock, then enter the PIN and tap <b>Save to the cabinet</b>.</li>
+          </ol>
+          <p style="color:var(--muted)">Times follow your cabinet's own clock and time zone, so there's nothing to set.</p>
+        </div>
+      </div>
+      <div class="row3 setup-shots" style="margin-top:26px">
+        <figure><img src="assets/setup.jpg" alt="Teams and settings on the cabinet: Your teams, switches for the score horn, hands-off mode and the live view, and the QR code, address and PIN" loading="lazy"><figcaption><b>Teams and settings</b><span>Your teams and the switches, on the cabinet.</span></figcaption></figure>
+        <figure><img src="assets/picker.jpg" alt="Picking NHL teams on the cabinet: a grid of team logos with a check on the Canadiens" loading="lazy"><figcaption><b>Pick a team</b><span>Flippers to move, Start to add or remove.</span></figcaption></figure>
+        <figure><img src="assets/phone.jpg" alt="The setup page in a browser: your teams with logos, add a team, units, clock and switches" loading="lazy"><figcaption><b>Phone or computer</b><span>The same choices, in a browser.</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -310,14 +331,14 @@ footer .wrap { display: grid; gap: 8px; }
     <div class="wrap">
       <div class="head">
         <span class="cap">Controls</span>
-        <h2>Flippers and a few buttons</h2>
+        <h2>The cabinet's own buttons</h2>
       </div>
       <div class="pane table">
         <table>
-          <tr><td>Flippers (or left / right)</td><td>Move between cards on the home screen. On a game page, step through the other games.</td></tr>
-          <tr><td>A</td><td>Open the highlighted card: your next game, the first game in Scores, or the full standings.</td></tr>
-          <tr><td>Start</td><td>Teams and settings: the setup code and PIN, and switches for the score horn, hands-off mode and the live view (flippers choose, A switches).</td></tr>
-          <tr><td>B / Back</td><td>Back to the home screen. On the home screen, leave Game Day.</td></tr>
+          <tr><td>Flippers</td><td>Move between cards, teams, games and logos. Hold one to scroll fast.</td></tr>
+          <tr><td>Start</td><td>Open or select the highlighted card, game, team or switch.</td></tr>
+          <tr><td>Rewind</td><td>Go back. On the home screen, leave Game Day.</td></tr>
+          <tr><td>With the control panel</td><td>A and B work too (A selects, B goes back), the joystick or d-pad moves, and the on-screen hints show A and B.</td></tr>
         </table>
       </div>
       <p style="color:var(--muted); margin-top:14px">Game pages and the scores list go back by themselves after a minute. Team pages and the live view stay up. With hands-off mode on, the cabinet shows each team in turn when nobody touches it for a minute.</p>
@@ -338,7 +359,8 @@ footer .wrap { display: grid; gap: 8px; }
               <li>Check that your phone or computer is on the same network as the cabinet, not on mobile data or a guest network.</li>
               <li>Type the address shown under the code (for example <code>http://192.168.1.20:8080/</code>) into a browser on your phone or computer. Keep the <code>http://</code>, not https.</li>
               <li>If the cabinet shows more than one address under "Also:", try those.</li>
-              <li>If the screen says the setup page isn't available, the cabinet isn't on a network. Connect it to Wi-Fi in the cabinet's settings and open Game Day again.</li>
+              <li>If the screen says it isn't available, the cabinet isn't on a network. Connect it to Wi-Fi in the cabinet's settings and open Game Day again.</li>
+              <li>You don't need the page at all: pick your teams on the cabinet under Teams and settings, Your teams.</li>
             </ol>
           </div>
         </details>
@@ -427,11 +449,11 @@ footer .wrap { display: grid; gap: 8px; }
           </details>
           <details>
             <summary>Can it sound a horn when my team scores?</summary>
-            <div class="a"><p>Yes. Press Start on the cabinet, highlight <b>Score horn</b> and press A; it plays once so you can hear it. It's also on the setup page. With or without the horn, a banner and the DMD show every score of your teams (basketball: when your team takes the lead).</p></div>
+            <div class="a"><p>Yes. Open <b>Teams and settings</b> (the last card on the home screen), highlight <b>Score horn</b> and press Start; it plays once so you can hear it. It's also on the setup page. With or without the horn, a banner and the DMD show every score of your teams (basketball: when your team takes the lead).</p></div>
           </details>
           <details>
             <summary>What is hands-off mode?</summary>
-            <div class="a"><p>When nobody touches the cabinet for a minute on the home screen, Game Day shows a live game of yours, or each team's page for 20 seconds in turn. Press any button to take over again. Switch it off under Start on the cabinet, or on the setup page.</p></div>
+            <div class="a"><p>When nobody touches the cabinet for a minute on the home screen, Game Day shows a live game of yours, or each team's page for 20 seconds in turn. Press any button to take over again. Switch it off in Teams and settings on the cabinet, or on the setup page.</p></div>
           </details>
           <details>
             <summary>How do I update Game Day?</summary>
@@ -439,7 +461,7 @@ footer .wrap { display: grid; gap: 8px; }
           </details>
           <details>
             <summary>Do I need the Arcade Control Panel?</summary>
-            <div class="a"><p>No. Everything works with the flippers, A, B and Start.</p></div>
+            <div class="a"><p>No. Everything works with the cabinet's own buttons: the flippers move, Start selects and Rewind goes back. If the control panel is plugged in, A and B work too and the hints on screen change to match.</p></div>
           </details>
         </div>
         <div class="qa">
@@ -469,6 +491,18 @@ footer .wrap { display: grid; gap: 8px; }
             <div class="a"><p>No. Game Day is a free, independent app. Team names and logos belong to their teams and leagues.</p></div>
           </details>
         </div>
+      </div>
+    </div>
+  </section>
+  <section id="support" class="support">
+    <div class="wrap">
+      <div class="head">
+        <span class="cap">Support</span>
+        <h2>Support Game Day</h2>
+      </div>
+      <div class="pane">
+        <p>Game Day is free, and every feature works without paying a thing. <b>Donations are never required</b>, but they're appreciated and help keep new versions coming. If Game Day has earned a spot on your cabinet, you can chip in through PayPal.</p>
+        <a class="btn main" href="https://www.paypal.me/Bla1ze81" target="_blank" rel="noopener"><svg class="pp" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.016 19.198h-4.2a.562.562 0 0 1-.555-.65L5.093.584A.692.692 0 0 1 5.776 0h7.222c3.417 0 5.904 2.488 5.846 5.5-.006.25-.027.5-.066.747A6.794 6.794 0 0 1 12.071 12H8.743a.69.69 0 0 0-.682.583l-.325 2.056-.013.083-.692 4.39-.015.087zM19.79 6.142c-.01.087-.01.175-.023.261a7.76 7.76 0 0 1-7.695 6.598H9.007l-.283 1.795-.013.083-.692 4.39-.134.843-.014.088H6.86l-.497 3.15a.562.562 0 0 0 .555.65h3.612c.34 0 .63-.249.683-.585l.952-6.031a.692.692 0 0 1 .683-.584h2.126a6.793 6.793 0 0 0 6.707-5.752c.306-1.95-.466-3.744-1.89-4.906z"/></svg>Donate with PayPal</a>
       </div>
     </div>
   </section>
