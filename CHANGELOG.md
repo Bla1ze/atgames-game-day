@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.7 — 20 November 2026
+
+**A card for every team you follow, and a page for each one.**
+
+- **Home:** one card per team: its live score, today's result, or its next
+  game with a countdown. Today's scores is the last card.
+- **Team pages:** highlight a team and press A for its game now or next (with
+  the weather where it's played), its last game and its standings. The
+  flippers switch teams, and the backglass and DMD follow along.
+- **Today's scores:** every game today in your leagues; press A to open one.
+- **Fixed:** the flippers got stuck on the Scores card.
+- **Fixed:** only your first team showed up; every team you follow does now.
+- **Fixed:** white team logos disappeared on highlighted cards.
+
 ## 0.6 — 20 November 2026
 
 - The version number now shows at the bottom of the home screen, so you can
