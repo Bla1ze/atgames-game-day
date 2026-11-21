@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.9 — 20 November 2026
+
+**Final results, top performers, and every live game at once.**
+
+- **Final results:** when one of your teams' games ends, a banner and the DMD
+  show the result, like "W 2-1 vs PHI". The score horn sounds for a win.
+- **Top performers:** each game page shows both teams' leaders, like points,
+  rebounds and assists.
+- **Every live game at once:** when two or more of your teams play at the same
+  time, the live view shows them all. The flippers choose one; A opens it.
+
 ## 0.8 — 20 November 2026
 
 **Score alerts, a horn, and a hands-off mode.**
